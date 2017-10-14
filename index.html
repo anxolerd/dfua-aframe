@@ -14,45 +14,61 @@
     <a-scene>
       <a-assets>
         <video id="player" autoplay="true">
+        <a-asset-item id="ds-obj" src="/death_star/death-star-II.obj"></a-asset-item>
+        <a-asset-item id="ds-mtl" src="/death_star/death-star-II.mtl"></a-asset-item>
       </a-assets>
-      <a-box
-        position="0 1.6 -5" 
-        scale="2 3 4"
-        rotation="45 30 10"
-        material="src:url(https://cdn.hyperdev.com/click-me.svg?1477239469954)"
-      >
-      </a-box> 
-      <a-sphere 
-        position="0 1.6 5" 
-        scale="2 3 4"
-        rotation="45 30 10"
-        material="src:url(https://cdn.hyperdev.com/drag-in-files.svg?1477153069954)"
-      >
-      </a-sphere> 
-      <a-entity
-        geometry="primitive:box"
-        material="wireframe:true"
-      >
-      </a-entity>>
-      <a-entity
-        position="0 5 0"
-        geometry="primitive:sphere"
-        material="wireframe:true"
-      >
-      </a-entity>>
+      <a-entity>
+        <a-animation property="rotation" dur="3000" to="0 -360 0" repeat="indefinite" easing="linear">
+        </a-animation>
+        <a-box
+          position="0 1.6 -5" 
+          scale="2 3 4"
+          rotation="45 30 10"
+          material="src:url(https://cdn.hyperdev.com/click-me.svg?1477239469954)"
+        >
+        </a-box> 
+        <a-sphere 
+          position="0 1.6 5" 
+          scale="2 3 4"
+          rotation="45 30 10"
+          material="src:url(https://cdn.hyperdev.com/drag-in-files.svg?1477153069954)"
+        >
+        </a-sphere> 
+        <a-entity
+          geometry="primitive:box"
+          material="wireframe:true"
+        >
+        </a-entity>
+        <a-entity
+          position="0 5 0"
+          geometry="primitive:sphere"
+          material="wireframe:true"
+        >
+        </a-entity>
+      </a-entity>
       <a-sky material="src:#player"></a-sky>
-      <!--<a-sky src="/bg.jpg"></a-sky>-->
+      <a-entity>
+        <a-animation property="rotation" dur="40000" to="0 360 0" repeat="indefinite" easing="linear">
+        </a-animation>
+        <a-entity 
+          position="0 0 -2000"
+          obj-model="obj: #ds-obj; mtl: #ds-mtl"
+        >
+          <a-animation property="rotation" dur="10000" to="0 360 0" repeat="indefinite" easing="linear">
+          </a-animation>
+        </a-entity>
+      </a-entity>
     </a-scene>
   </body>
 
 <video id="player" controls></video>
 <script>
   var player = document.getElementById('player');
-
+ 
   var handleSuccess = function(stream) {
     player.srcObject = stream;
   };
-
+ 
   navigator.mediaDevices.getUserMedia({ audio: true, video: true })
       .then(handleSuccess)
 </script>
